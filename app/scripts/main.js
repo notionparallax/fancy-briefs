@@ -1,5 +1,5 @@
 $(function(){
-  setTimeout(main, 3000);
+  main();
 });
 
 function loadContent(){
@@ -7,10 +7,30 @@ function loadContent(){
 }
 
 function processContent(googleSpreadsheet){
-
+  var documentData = [];
+  for (var rowNumber in googleSpreadsheet.feed.entry) {
+    var row = googleSpreadsheet.feed.entry[rowNumber];
+    var rowData = [row.title.$t].concat( row.content.$t.split(',').map(function(columns) {
+      return columns.split(':')[1].trim();
+    }) );
+    documentData.push(rowData);
+  }
+  return documentData;
 }
 
-function applyTemplate(){
+function applyTemplate(documentData){
+  console.log(documentData);
+  var slides = $(".slides");
+  for (var slideNumber in documentData) {
+    var slideData = documentData[slideNumber],
+        slidePTags = slideData.splice(1).map(function(text) { return '<p>' + text + '</p>'; }).join(''),
+        slide = $('<section>'
+        + '<h1>' + slideData[0] + '</h1>'
+        + slidePTags 
+        + '</section>' );
+    slides.append(slide);
+    console.log(slidePTags);
+  }
 }
 
 function initReveal() {
