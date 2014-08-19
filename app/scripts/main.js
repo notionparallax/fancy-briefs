@@ -22,14 +22,19 @@ function applyTemplate(documentData){
   console.log(documentData);
   var slides = $(".slides");
   for (var slideNumber in documentData) {
-    var slideData = documentData[slideNumber],
-        slidePTags = slideData.splice(1).map(function(text) { return '<p>' + text + '</p>'; }).join(''),
-        slide = $('<section>'
-        + '<h1>' + slideData[0] + '</h1>'
-        + slidePTags 
-        + '</section>' );
+    var slideData = documentData[slideNumber];
+    var slideColumn = [];
+    for (var i = 0; i < slideData.length; i+= 2) {
+      slideColumn.push('<section>'
+        + '<h1>' + slideData[i] + '</h1>'
+        + '<p>' + slideData[i+1] + '</p>'
+        + '</section>'
+        );
+    }
+    slide = $('<section>'
+      + slideColumn.join('')
+      + '</section>' );
     slides.append(slide);
-    console.log(slidePTags);
   }
 }
 
