@@ -6,12 +6,33 @@
     <title>Fancy Briefs</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="/bower_components/reveal.js/css/reveal.min.css">
+		<link rel="stylesheet" href="/bower_components/reveal.js/css/theme/default.css" id="theme">
   </head>
   <body>
 
+    <div class="reveal">
+      <div class="slides">
+        <section>Hello</section>
+        <section>World</section>
+      </div>
+    </div>
+
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/reveal.js/js/reveal.js"></script>
+		<script src="/bower_components/reveal.js/lib/js/head.min.js"></script>
     <script src="/scripts/main.js"></script>
+    <!-- Revealjs print stuff -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
 
   </body>
 </html>
