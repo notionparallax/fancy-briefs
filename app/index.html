@@ -9,6 +9,35 @@
 
 		<link rel="stylesheet" href="/bower_components/reveal.js/css/reveal.min.css">
 		<link rel="stylesheet" href="/bower_components/reveal.js/css/theme/default.css" id="theme">
+    <style type="text/css" media="screen">
+    section.present{
+      background-color: rgba(255,255,255,0.8);
+      color: black;
+      text-align: left;
+      font-size: 70%;
+      padding: 2em;
+    }
+    .vanilla{
+      -webkit-column-count: 3;
+    }
+    .tti-body{
+      -webkit-column-count: 2;
+      width:66%;
+      float:left;
+
+display: inline-block;
+    }
+    .tti-image {
+      height: 100%;
+      width: 33%;
+      float: right;
+      display: inline-block;
+      border:1px dashed silver;
+      background-size: cover;
+      background-position-x: 50%;
+      background-position-y: 50%;
+    }
+    </style>
   </head>
   <body>
 
@@ -28,6 +57,7 @@
     <script id="slide-template" type="text/x-handlebars-template">
       {{#each result}}
       <section>
+
         {{#each Vanilla}}
           {{#each body}}
             {{#if p}}
@@ -38,6 +68,23 @@
             {{/if}}
           {{/each}}
         {{/each}}
+
+        {{mylog this}}
+        {{#each TTI}}
+        <div class="tti-image" style="{{ttiImage this.image.[0].img.value}}">image in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here please
+        </div>
+        <div class="tti-body">
+          {{#each body}}
+            {{#if p}}
+              <p>{{p.value}}</p>
+            {{/if}}
+            {{#if img}}
+              <img src="{{img.value}}"></img>
+            {{/if}}
+          {{/each}}
+          </div>
+        {{/each}}
+
       </section>
       {{/each}}
     </script>
