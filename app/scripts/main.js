@@ -3,39 +3,17 @@ $(function(){
 });
 
 function loadContent(){
-  return $.getJSON("https://spreadsheets.google.com/feeds/list/1xPj-1ZVF1K4Y5kvdRLH8V9UTqkfr2vUFesysNeMtg7U/1/public/basic?alt=json");
-}
-
-function processContent(googleSpreadsheet){
-  var documentData = [];
-  for (var rowNumber in googleSpreadsheet.feed.entry) {
-    var row = googleSpreadsheet.feed.entry[rowNumber];
-    var rowData = [row.title.$t].concat( row.content.$t.split(',').map(function(columns) {
-      return columns.split(':')[1].trim();
-    }) );
-    documentData.push(rowData);
-  }
-  return documentData;
+  return $.getJSON('https://script.google.com/macros/s/AKfycbyPtW_xAzkPoU13lZbqFjxg7PuplLXKa-ObukiE4YZddCS9yvii/exec');
 }
 
 function applyTemplate(documentData){
-  console.log(documentData);
+  var slideTemplate = Handlebars.compile(
+        $('[type="text/x-handlebars-template"]')[0].innerHTML
+      );
+  var appliedTemplate = slideTemplate(documentData);
+
   var slides = $(".slides");
-  for (var slideNumber in documentData) {
-    var slideData = documentData[slideNumber];
-    var slideColumn = [];
-    for (var i = 0; i < slideData.length; i+= 2) {
-      slideColumn.push('<section>'
-        + '<h1>' + slideData[i] + '</h1>'
-        + '<p>' + slideData[i+1] + '</p>'
-        + '</section>'
-        );
-    }
-    slide = $('<section>'
-      + slideColumn.join('')
-      + '</section>' );
-    slides.append(slide);
-  }
+  slides.append( appliedTemplate );
 }
 
 function initReveal() {
@@ -54,7 +32,6 @@ function initReveal() {
 
 function main(){
   loadContent()
-    .then(processContent)
     .then(applyTemplate)
     .then(initReveal);
 }

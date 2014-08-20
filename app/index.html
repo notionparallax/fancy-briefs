@@ -17,10 +17,31 @@
       </div>
     </div>
 
+    <!-- Javascript libraries (via bower) -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/reveal.js/js/reveal.js"></script>
 		<script src="/bower_components/reveal.js/lib/js/head.min.js"></script>
+		<script src="/bower_components/handlebars/handlebars.js"></script>
     <script src="/scripts/main.js"></script>
+
+    <!-- handlebars templates -->
+    <script id="slide-template" type="text/x-handlebars-template">
+      {{#each result}}
+      <section>
+        {{#each Vanilla}}
+          {{#each body}}
+            {{#if p}}
+              <p>{{p.value}}</p>
+            {{/if}}
+            {{#if img}}
+              <img src="{{img.value}}"></img>
+            {{/if}}
+          {{/each}}
+        {{/each}}
+      </section>
+      {{/each}}
+    </script>
+
     <!-- Revealjs print stuff -->
 		<script>
 			if( window.location.search.match( /print-pdf/gi ) ) {
