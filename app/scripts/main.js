@@ -6,11 +6,19 @@ function loadContent() {
     return $.getJSON('https://script.google.com/macros/s/AKfycbyPtW_xAzkPoU13lZbqFjxg7PuplLXKa-ObukiE4YZddCS9yvii/exec');
 }
 
-function applyTemplate(documentData) {
-    var slideTemplate = Handlebars.compile(
-        $('[type="text/x-handlebars-template"]')[0].innerHTML
-    );
-    var appliedTemplate = slideTemplate(documentData);
+
+function applyTemplate(documentData){
+  var slideTemplate = Handlebars.compile(
+        $('#slide-template')[0].innerHTML
+      );
+  var partialTemplates = $('[data-partial-name]')
+    .each(function(index,partial) {
+      Handlebars.registerPartial(
+        partial.attributes['data-partial-name'].value,
+        partial.innerHTML
+      );
+    });
+  var appliedTemplate = slideTemplate(documentData);
 
     var slides = $(".slides");
     slides.append(appliedTemplate);
@@ -114,17 +122,6 @@ Handlebars.registerHelper('ourtemplate', function(obj) {
 });
 
 Handlebars.registerHelper('ttiImage', function(tti) {
-    console.log(JSON.stringify(tti));
-    return "background-image:url(" + JSON.stringify(tti) + ")";
-});
-
-Handlebars.registerHelper('mylog', function(thing) {
-    console.log(thing);
-});
-
-
-Handlebars.registerHelper('ttiImage', function(tti) {
-
     console.log(JSON.stringify(tti));
     return "background-image:url(" + JSON.stringify(tti) + ")";
 });
