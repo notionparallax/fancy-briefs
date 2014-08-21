@@ -26,8 +26,8 @@ function initReveal() {
         center: false,
         touch: true,
         hideAddressBar: true,
-        width: '100%',
-        height: '100%',
+        width:  '90%',
+        height: '90%',
         margin: 0,
         transition: 'default'
     });

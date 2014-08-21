@@ -5,6 +5,8 @@ section.present {
     text-align: left;
     font-size: 70%;
     padding: 2em;
+    height: 100%;
+    width: 100%
 }
 .vanilla {
     -webkit-column-count: 3;
