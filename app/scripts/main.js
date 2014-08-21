@@ -8,8 +8,15 @@ function loadContent(){
 
 function applyTemplate(documentData){
   var slideTemplate = Handlebars.compile(
-        $('[type="text/x-handlebars-template"]')[0].innerHTML
+        $('#slide-template')[0].innerHTML
       );
+  var partialTemplates = $('[data-partial-name]')
+    .each(function(index,partial) {
+      Handlebars.registerPartial(
+        partial.attributes['data-partial-name'].value,
+        partial.innerHTML
+      );
+    });
   var appliedTemplate = slideTemplate(documentData);
 
   var slides = $(".slides");
