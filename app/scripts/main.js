@@ -33,6 +33,9 @@ function initReveal() {
     center: false,
     touch: true,
     hideAddressBar: true,
+    width: '100%',
+    height: '100%',
+    margin:0,
     transition: 'default'
   });
 }
@@ -42,3 +45,12 @@ function main(){
     .then(applyTemplate)
     .then(initReveal);
 }
+
+Handlebars.registerHelper('ttiImage', function(tti) {
+  console.log(JSON.stringify(tti));
+  return "background-image:url("+JSON.stringify(tti)+")";
+});
+
+Handlebars.registerHelper('mylog', function(thing) {
+  console.log(JSON.stringify(thing));
+});
