@@ -7,8 +7,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="stylesheet" href="/bower_components/reveal.js/css/reveal.min.css">
-		<link rel="stylesheet" href="/bower_components/reveal.js/css/theme/default.css" id="theme">
+    <link rel="import" href="templates/polymer-templates.html">
+
     <style type="text/css" media="screen">
     section.present{
       background-color: rgba(255,255,255,0.8);
@@ -41,17 +41,16 @@ display: inline-block;
   </head>
   <body>
 
-    <div class="reveal">
-      <div class="slides">
-      </div>
-    </div>
-
     <!-- Javascript libraries (via bower) -->
+    <script src="/bower_components/platform/platform.js"></script>
+    <script src="/bower_components/polymer/polymer.js"></script>
     <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/reveal.js/js/reveal.js"></script>
-		<script src="/bower_components/reveal.js/lib/js/head.min.js"></script>
-		<script src="/bower_components/handlebars/handlebars.js"></script>
     <script src="/scripts/main.js"></script>
+
+    <!-- Polymer elements -->
+
+    <!-- Top Polymer element -->
+    <brief-content-tti id="test"></brief-content-tti>
 
     <!-- handlebars templates -->
     <script id="slide-template" type="text/x-handlebars-template">

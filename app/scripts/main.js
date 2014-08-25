@@ -7,50 +7,11 @@ function loadContent(){
 }
 
 function applyTemplate(documentData){
-  var slideTemplate = Handlebars.compile(
-        $('#slide-template')[0].innerHTML
-      );
-  var partialTemplates = $('[data-partial-name]')
-    .each(function(index,partial) {
-      Handlebars.registerPartial(
-        partial.attributes['data-partial-name'].value,
-        partial.innerHTML
-      );
-    });
-  var appliedTemplate = slideTemplate(documentData);
-
-  var slides = $(".slides");
-  slides.append( appliedTemplate );
-}
-
-function initReveal() {
-  Reveal.initialize({
-    controls: true,
-    slideNumber: true,
-    history: true,
-    keyboard: true,
-    overview: true,
-    center: false,
-    touch: true,
-    hideAddressBar: true,
-    width: '100%',
-    height: '100%',
-    margin:0,
-    transition: 'default'
-  });
+  console.log(documentData.result[2]);
+  window.test.tti = documentData.result[2].TTI;
 }
 
 function main(){
   loadContent()
     .then(applyTemplate)
-    .then(initReveal);
 }
-
-Handlebars.registerHelper('ttiImage', function(tti) {
-  console.log(JSON.stringify(tti));
-  return "background-image:url("+JSON.stringify(tti)+")";
-});
-
-Handlebars.registerHelper('mylog', function(thing) {
-  console.log(JSON.stringify(thing));
-});

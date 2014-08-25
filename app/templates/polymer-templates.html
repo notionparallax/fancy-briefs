@@ -1,0 +1,35 @@
+<polymer-element name="brief-img" attributes="element" noscript>
+  <template>
+    <template if="{{element.img}}">
+      <img src="{{element.img.value}}"></img>
+    </template>
+  </template>
+</polymer-element>
+<polymer-element name="brief-p" attributes="element" noscript>
+  <template>
+  <style>
+    p { background-color: red; }
+  </style>
+    <template if="{{element.p}}">
+    <p>{{element.p.value}}</p>
+    </template>
+  </template>
+</polymer-element>
+
+<polymer-element name="brief-content-tti" attributes="tti" noscript>
+  <template>
+    <template repeat="{{s in tti}}">
+      <template if="{{s.image}}">
+        <div class="tti-image" style="background-image: url({{s.image[0].img.value}});"></div>
+      </template>
+      <template if="{{s.body}}">
+        <div class="tti-body">
+          <template repeat="{{e in s.body}}">
+            <brief-p element="{{e}}"></brief-p>
+            <brief-img element="{{e}}"></brief-img>
+          </template>
+        </div>
+      </template>
+    </template>
+  </template>
+</polymer-element>
