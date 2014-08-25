@@ -10,33 +10,11 @@
     <link rel="import" href="templates/polymer-templates.html">
 
     <style type="text/css" media="screen">
-    section.present{
-      background-color: rgba(255,255,255,0.8);
-      color: black;
-      text-align: left;
-      font-size: 70%;
-      padding: 2em;
-    }
-    .vanilla{
-      -webkit-column-count: 3;
-    }
-    .tti-body{
-      -webkit-column-count: 2;
-      width:66%;
-      float:left;
-
-display: inline-block;
-    }
-    .tti-image {
-      height: 100%;
-      width: 33%;
-      float: right;
-      display: inline-block;
-      border:1px dashed silver;
-      background-size: cover;
-      background-position-x: 50%;
-      background-position-y: 50%;
-    }
+      * { box-sizing: border-box;}
+      body, html{
+        height: 99%;
+        margin:  0;
+      }
     </style>
   </head>
   <body>
@@ -50,7 +28,8 @@ display: inline-block;
     <!-- Polymer elements -->
 
     <!-- Top Polymer element -->
-    <brief-content-tti id="test"></brief-content-tti>
+    <!-- <brief-content-tti  id="test"    ></brief-content-tti> -->
+    <brief-content-titlepage id="test"    ></brief-content-titlepage>
 
     <!-- handlebars templates -->
     <script id="slide-template" type="text/x-handlebars-template">

@@ -7,8 +7,11 @@ function loadContent(){
 }
 
 function applyTemplate(documentData){
-  console.log(documentData.result[2]);
-  window.test.tti = documentData.result[2].TTI;
+  console.log(documentData);
+  window.test={};
+  window.mytest = documentData;
+  window.test.tti       = documentData.result[2].TTI;
+  window.test.titlepage = documentData.result[3].TitlePage;
 }
 
 function main(){

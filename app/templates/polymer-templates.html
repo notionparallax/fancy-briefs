@@ -5,11 +5,9 @@
     </template>
   </template>
 </polymer-element>
+
 <polymer-element name="brief-p" attributes="element" noscript>
   <template>
-  <style>
-    p { background-color: red; }
-  </style>
     <template if="{{element.p}}">
     <p>{{element.p.value}}</p>
     </template>
@@ -18,9 +16,31 @@
 
 <polymer-element name="brief-content-tti" attributes="tti" noscript>
   <template>
+  <style>
+  .tti-body{
+      -webkit-column-count: 2;
+      width:66%;
+      float:left;
+      display: inline-block;
+    }
+    .tti-image {
+      height:  100%;
+      width:   33%;
+      float:   right;
+      display: inline-block;
+      border:  1px dashed silver;
+      background-size:       cover;
+      background-position-x: 50%;
+      background-position-y: 50%;
+    }
+    .container{
+      height: 100%;
+    }
+  </style>
+  <div class="container">
     <template repeat="{{s in tti}}">
       <template if="{{s.image}}">
-        <div class="tti-image" style="background-image: url({{s.image[0].img.value}});"></div>
+        <div class="tti-image" style="background-image: url({{s.image[0].img.value}});">lorem</div>
       </template>
       <template if="{{s.body}}">
         <div class="tti-body">
@@ -31,5 +51,30 @@
         </div>
       </template>
     </template>
+    </div>
+  </template>
+</polymer-element>
+
+<polymer-element name="brief-content-titlepage" attributes="titlepage" noscript>
+  <template>
+  <style>
+    .container{
+      height: 100%;
+    }
+  </style>
+  <div class="container">
+    <template repeat="{{s in titlepage}}">
+    {{s}}
+      <template if="{{s.headline}}">
+        <h1>headline here</h1>
+      </template>
+      <template if="{{s.image}}">
+        <div class="titlepage-image" style="background-image: url({{s.image[0].img.value}});">lorem</div>
+      </template>
+      <template if="{{s.byline}}">
+        <p>byline in here. byline in here. byline in here. byline in here. byline in here. byline in here. byline in here. byline in here. </p>
+      </template>
+    </template>
+    </div>
   </template>
 </polymer-element>
