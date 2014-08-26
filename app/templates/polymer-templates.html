@@ -79,3 +79,155 @@
     </div>
   </template>
 </polymer-element>
+
+<polymer-element name="brief-row" attributes="x rowdata" constructor="BriefRow" on-keyup="{{handler}}">
+  <template>
+    <style>
+      #row .page { display: none; }
+      #row .selected-page { display: block; }
+    </style>
+    <div id="row">
+    <template repeat="{{page in row}}">
+      <template if="{{page.TTI}}">
+        <brief-content-tti class="page {{page.class}}" tti="{{page.TTI}}"></brief-content-tti>
+      </template>
+      <template if="{{page.TitlePage}}">
+        <brief-content-titlepage class="page {{page.class}}" titlepage="{{page.TitlePage}}"></brief-content-titlepage>
+      </template>
+    </template>
+    </div>
+  </template>
+  <script>
+    (function(){
+      var currentIndex = 0;
+      Polymer('brief-row', {
+        ready: function() { this.tabIndex = 0; },
+        handler: function(e) {
+          console.log('event reached row');
+          switch(e.which) {
+            // left arrow key
+            case 37: this.shiftIndex(true); break;
+            // right arrow key
+            case 39: this.shiftIndex(); break;
+          }
+        },
+        shiftIndex: function(shiftLeft){
+          if (shiftLeft) {
+            // add an extra this.row.length to avoid negative numbers
+            this.currentPage = (currentIndex-1+this.row.length) % this.row.length;
+          } else {
+            this.currentPage = (currentIndex+1) % this.row.length;
+          }
+        },
+        row: null,
+        rowdataChanged: function(whatever,newRow) {
+          this.row = newRow;
+          this.currentPage = 0;
+        },
+        get pages() {
+          return this.$.row.querySelectorAll('page');
+        },
+        get currentPage() {
+          return this.pages[currentIndex];
+        },
+        set currentPage(index) {
+          this.row[currentIndex].class = '';
+          currentIndex = index;
+          this.row[currentIndex].class = 'selected-page';
+        }
+      });
+    }());
+  </script>
+</polymer-element>
+
+<polymer-element name="brief-row-group"
+                 attributes="rowGroupData"
+                 constructor="BriefRowGroup"
+                 on-keyup="{{handler}}">
+  <template>
+    <style>
+      #group .row { display: none; }
+      #group .selected-row { display: block; }
+    </style>
+    <div id="group">
+    <template repeat="{{row in rowGroup}}">
+    <brief-row class="row {{row.class}}" rowdata="{{row}}"></brief-row>
+    </template>
+    </div>
+  </template>
+  <script>
+    (function(){
+      var currentIndex = 0;
+      Polymer('brief-row-group', {
+        ready: function() { this.tabIndex = 0; },
+        handler: function(e) {
+          switch(e.which) {
+            // up arrow key
+            case 38: this.shiftIndex(true); break;
+            // down arrow key
+            case 40: this.shiftIndex(); break;
+          }
+        },
+        shiftIndex: function(shiftLeft){
+          if (shiftLeft) {
+            // add an extra this.rowGroup.length to avoid negative numbers
+            this.currentRow = (currentIndex-1+this.rowGroup.length) % this.rowGroup.length;
+          } else {
+            this.currentRow = (currentIndex+1) % this.rowGroup.length;
+          }
+        },
+        rowGroup: null,
+        setrowGroupData: function(newRowGroup) {
+          console.log('set rowgroupdata');
+          this.rowGroup = newRowGroup;
+          this.currentRow = 0;
+        },
+        get rows() {
+          return this.$.group.querySelectorAll('brief-row');
+        },
+        get currentRow() {
+          return this.rows[currentIndex];
+        },
+        set currentRow(index) {
+          this.rowGroup[currentIndex].class = '';
+          currentIndex = index;
+          this.rowGroup[currentIndex].class = 'selected-row';
+          if (this.currentRow) {
+            this.currentRow.currentPage = 0;
+            this.currentRow.currentPage.focus();
+          }
+        }
+      });
+    }());
+  </script>
+</polymer-element>
+
+<polymer-element name="fancy-brief">
+  <template id="root">
+    <content select="#header"></content>
+    <p id="loadingMsg">Loading...</p>
+    <div id="rowWrapper"></div>
+    <content select="#footer"></content>
+  </template>
+  <script>
+    function loadContent(){
+      return $.getJSON('https://script.google.com/macros/s/AKfycbyPtW_xAzkPoU13lZbqFjxg7PuplLXKa-ObukiE4YZddCS9yvii/exec');
+    }
+    Polymer('fancy-brief', {
+      ready: function() {
+        var _this = this;
+        loadContent()
+        .then(function(documentData) {
+          var rowGroupData = [];
+          for (var i = 0; i < 3; i++) {
+            rowGroupData.push( JSON.parse(JSON.stringify(documentData.result)) );
+          }
+          var rowGroup = new BriefRowGroup();
+          rowGroup.setrowGroupData( rowGroupData );
+          _this.$.loadingMsg.style.display = 'none';
+          _this.$.rowWrapper.appendChild(rowGroup);
+        });
+      }
+    });
+  </script>
+</polymer-element>

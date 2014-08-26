@@ -6,9 +6,6 @@
     <title>Fancy Briefs</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="import" href="templates/polymer-templates.html">
-
     <style type="text/css" media="screen">
       * { box-sizing: border-box;}
       body, html{
@@ -25,58 +22,14 @@
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/scripts/main.js"></script>
 
-    <!-- Polymer elements -->
+    <!-- Polymer components import -->
+    <link rel="import" href="templates/polymer-templates.html">
 
     <!-- Top Polymer element -->
-    <!-- <brief-content-tti  id="test"    ></brief-content-tti> -->
-    <brief-content-titlepage id="test"    ></brief-content-titlepage>
-
-    <!-- handlebars templates -->
-    <script id="slide-template" type="text/x-handlebars-template">
-      {{#each result}}
-      <section>
-
-        {{#each Vanilla}}
-          {{#each body}}
-            {{#if p}}
-              <p>{{p.value}}</p>
-            {{/if}}
-            {{#if img}}
-              <img src="{{img.value}}"></img>
-            {{/if}}
-          {{/each}}
-        {{/each}}
-
-        {{mylog this}}
-        {{#each TTI}}
-        <div class="tti-image" style="{{ttiImage this.image.[0].img.value}}">image in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here pleaseimage in here please
-        </div>
-        <div class="tti-body">
-          {{#each body}}
-            {{#if p}}
-              <p>{{p.value}}</p>
-            {{/if}}
-            {{#if img}}
-              <img src="{{img.value}}"></img>
-            {{/if}}
-          {{/each}}
-          </div>
-        {{/each}}
-
-      </section>
-      {{/each}}
-    </script>
-
-    <!-- Revealjs print stuff -->
-		<script>
-			if( window.location.search.match( /print-pdf/gi ) ) {
-				var link = document.createElement( 'link' );
-				link.rel = 'stylesheet';
-				link.type = 'text/css';
-				link.href = 'css/print/pdf.css';
-				document.getElementsByTagName( 'head' )[0].appendChild( link );
-			}
-		</script>
+    <fancy-brief>
+      <div id="header">header!!!</div>
+      <div id="footer">footer!!!</div>
+    </fancy-brief>
 
   </body>
 </html>
