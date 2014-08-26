@@ -16,27 +16,27 @@
 
 <polymer-element name="brief-content-tti" attributes="tti" noscript>
   <template>
-  <style>
-  .tti-body{
-      -webkit-column-count: 2;
-      width:66%;
-      float:left;
-      display: inline-block;
-    }
-    .tti-image {
-      height:  100%;
-      width:   33%;
-      float:   right;
-      display: inline-block;
-      border:  1px dashed silver;
-      background-size:       cover;
-      background-position-x: 50%;
-      background-position-y: 50%;
-    }
-    .container{
-      height: 100%;
-    }
-  </style>
+    <style>
+      .tti-body{
+        -webkit-column-count: 2;
+        width:66%;
+        float:left;
+        display: inline-block;
+      }
+      .tti-image {
+        height:  100%;
+        width:   33%;
+        float:   right;
+        display: inline-block;
+        border:  1px dashed silver;
+        background-size:       cover;
+        background-position-x: 50%;
+        background-position-y: 50%;
+      }
+      .container{
+        height: 100%;
+      }
+    </style>
   <div class="container">
     <template repeat="{{s in tti}}">
       <template if="{{s.image}}">
@@ -63,8 +63,8 @@
     }
   </style>
   <div class="container">
+    <p>I'm in ur template</p>
     <template repeat="{{s in titlepage}}">
-    {{s}}
       <template if="{{s.headline}}">
         <h1>headline here</h1>
       </template>
@@ -72,6 +72,7 @@
         <div class="titlepage-image" style="background-image: url({{s.image[0].img.value}});">lorem</div>
       </template>
       <template if="{{s.byline}}">
+        <p>This would be a body element</p>
         <p>byline in here. byline in here. byline in here. byline in here. byline in here. byline in here. byline in here. byline in here. </p>
       </template>
     </template>
